@@ -84,7 +84,7 @@ const FormSection = ({ data, onChange }) => {
               placeholder="🚀"
             />
           </div>
-          <div className="flex items-end">
+          <div className="flex flex-col justify-end space-y-2">
             <label className="flex items-center cursor-pointer">
               <input
                 type="checkbox"
@@ -93,6 +93,15 @@ const FormSection = ({ data, onChange }) => {
                 className="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <span className="text-sm font-medium text-gray-700">Center Header</span>
+            </label>
+            <label className="flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={data.quickLinks || false}
+                onChange={(e) => updateField('quickLinks', e.target.checked)}
+                className="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <span className="text-sm font-medium text-gray-700">Include Quick Links</span>
             </label>
           </div>
         </div>
@@ -332,6 +341,176 @@ const FormSection = ({ data, onChange }) => {
         ))}
       </section>
 
+      {/* Tech Stack */}
+      <section className="space-y-4 border-b pb-6">
+        <h3 className="text-lg font-semibold text-gray-700">🛠️ Tech Stack</h3>
+
+        <div className="space-y-3">
+          <div className="flex justify-between items-center">
+            <label className="text-sm font-medium text-gray-700">Core Technologies</label>
+            <button
+              onClick={() => {
+                const newData = { ...data };
+                if (!newData.techStack) newData.techStack = {};
+                if (!newData.techStack.core) newData.techStack.core = [];
+                newData.techStack.core.push({ category: '', value: '' });
+                onChange(newData);
+              }}
+              className="px-2 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs"
+            >
+              + Add Tech
+            </button>
+          </div>
+
+          {data.techStack?.core && data.techStack.core.map((tech, index) => (
+            <div key={index} className="p-3 bg-gray-50 rounded-lg">
+              <div className="flex justify-between items-start mb-2">
+                <span className="text-sm font-medium text-gray-700">Tech {index + 1}</span>
+                <button
+                  onClick={() => {
+                    const newData = { ...data };
+                    newData.techStack.core.splice(index, 1);
+                    onChange(newData);
+                  }}
+                  className="text-red-600 hover:text-red-800 text-sm"
+                >
+                  Remove
+                </button>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <input
+                  type="text"
+                  value={tech.category || ''}
+                  onChange={(e) => {
+                    const newData = { ...data };
+                    newData.techStack.core[index].category = e.target.value;
+                    onChange(newData);
+                  }}
+                  className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  placeholder="Category (e.g., Language)"
+                />
+                <input
+                  type="text"
+                  value={tech.value || ''}
+                  onChange={(e) => {
+                    const newData = { ...data };
+                    newData.techStack.core[index].value = e.target.value;
+                    onChange(newData);
+                  }}
+                  className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  placeholder="Technology (e.g., JavaScript)"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="space-y-3 mt-4">
+          <div className="flex justify-between items-center">
+            <label className="text-sm font-medium text-gray-700">Libraries & Frameworks</label>
+            <button
+              onClick={() => {
+                const newData = { ...data };
+                if (!newData.techStack) newData.techStack = {};
+                if (!newData.techStack.libraries) newData.techStack.libraries = [];
+                newData.techStack.libraries.push({ category: '', items: [] });
+                onChange(newData);
+              }}
+              className="px-2 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs"
+            >
+              + Add Library Category
+            </button>
+          </div>
+
+          {data.techStack?.libraries && data.techStack.libraries.map((lib, libIndex) => (
+            <div key={libIndex} className="p-3 bg-gray-50 rounded-lg space-y-2">
+              <div className="flex justify-between items-start">
+                <span className="text-sm font-medium text-gray-700">Library Category {libIndex + 1}</span>
+                <button
+                  onClick={() => {
+                    const newData = { ...data };
+                    newData.techStack.libraries.splice(libIndex, 1);
+                    onChange(newData);
+                  }}
+                  className="text-red-600 hover:text-red-800 text-sm"
+                >
+                  Remove
+                </button>
+              </div>
+              <input
+                type="text"
+                value={lib.category || ''}
+                onChange={(e) => {
+                  const newData = { ...data };
+                  newData.techStack.libraries[libIndex].category = e.target.value;
+                  onChange(newData);
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                placeholder="Category (e.g., UI Libraries)"
+              />
+
+              <div className="ml-4 space-y-2">
+                <button
+                  onClick={() => {
+                    const newData = { ...data };
+                    if (!newData.techStack.libraries[libIndex].items) {
+                      newData.techStack.libraries[libIndex].items = [];
+                    }
+                    newData.techStack.libraries[libIndex].items.push({ name: '', description: '' });
+                    onChange(newData);
+                  }}
+                  className="px-2 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 text-xs"
+                >
+                  + Add Library Item
+                </button>
+
+                {lib.items && lib.items.map((item, itemIndex) => (
+                  <div key={itemIndex} className="p-2 bg-white rounded border border-gray-200">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="text-xs text-gray-600">Item {itemIndex + 1}</span>
+                      <button
+                        onClick={() => {
+                          const newData = { ...data };
+                          newData.techStack.libraries[libIndex].items.splice(itemIndex, 1);
+                          onChange(newData);
+                        }}
+                        className="text-red-600 hover:text-red-800 text-xs"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <input
+                        type="text"
+                        value={item.name || ''}
+                        onChange={(e) => {
+                          const newData = { ...data };
+                          newData.techStack.libraries[libIndex].items[itemIndex].name = e.target.value;
+                          onChange(newData);
+                        }}
+                        className="px-2 py-1 border border-gray-300 rounded-md text-sm"
+                        placeholder="Name"
+                      />
+                      <input
+                        type="text"
+                        value={item.description || ''}
+                        onChange={(e) => {
+                          const newData = { ...data };
+                          newData.techStack.libraries[libIndex].items[itemIndex].description = e.target.value;
+                          onChange(newData);
+                        }}
+                        className="px-2 py-1 border border-gray-300 rounded-md text-sm"
+                        placeholder="Description"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Installation */}
       <section className="space-y-4 border-b pb-6">
         <h3 className="text-lg font-semibold text-gray-700">🚀 Installation</h3>
@@ -408,6 +587,98 @@ const FormSection = ({ data, onChange }) => {
               />
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* API Endpoints */}
+      <section className="space-y-4 border-b pb-6">
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-semibold text-gray-700">🌐 API Endpoints</h3>
+          <button
+            onClick={() => {
+              const newData = { ...data };
+              if (!newData.api) newData.api = {};
+              if (!newData.api.endpoints) newData.api.endpoints = [];
+              newData.api.endpoints.push({ method: 'GET', path: '', description: '' });
+              onChange(newData);
+            }}
+            className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm"
+          >
+            + Add Endpoint
+          </button>
+        </div>
+
+        {data.api?.endpoints && data.api.endpoints.map((endpoint, index) => (
+          <div key={index} className="p-4 bg-gray-50 rounded-lg space-y-2">
+            <div className="flex justify-between items-start">
+              <span className="text-sm font-medium text-gray-700">Endpoint {index + 1}</span>
+              <button
+                onClick={() => {
+                  const newData = { ...data };
+                  newData.api.endpoints.splice(index, 1);
+                  onChange(newData);
+                }}
+                className="text-red-600 hover:text-red-800 text-sm"
+              >
+                Remove
+              </button>
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              <select
+                value={endpoint.method || 'GET'}
+                onChange={(e) => {
+                  const newData = { ...data };
+                  newData.api.endpoints[index].method = e.target.value;
+                  onChange(newData);
+                }}
+                className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="PATCH">PATCH</option>
+                <option value="DELETE">DELETE</option>
+              </select>
+              <input
+                type="text"
+                value={endpoint.path || ''}
+                onChange={(e) => {
+                  const newData = { ...data };
+                  newData.api.endpoints[index].path = e.target.value;
+                  onChange(newData);
+                }}
+                className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+                placeholder="/api/endpoint"
+              />
+              <input
+                type="text"
+                value={endpoint.description || ''}
+                onChange={(e) => {
+                  const newData = { ...data };
+                  newData.api.endpoints[index].description = e.target.value;
+                  onChange(newData);
+                }}
+                className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+                placeholder="Description"
+              />
+            </div>
+          </div>
+        ))}
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Sample API Response (JSON)</label>
+          <textarea
+            value={data.api?.sampleResponse || ''}
+            onChange={(e) => {
+              const newData = { ...data };
+              if (!newData.api) newData.api = {};
+              newData.api.sampleResponse = e.target.value;
+              onChange(newData);
+            }}
+            rows="4"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm font-mono"
+            placeholder='{\n  "id": "1",\n  "status": "success"\n}'
+          />
         </div>
       </section>
 
