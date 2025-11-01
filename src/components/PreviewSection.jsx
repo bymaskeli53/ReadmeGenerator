@@ -1,13 +1,16 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const PreviewSection = ({ markdown }) => {
+  const { t } = useLanguage();
+
   return (
     <div className="p-6">
       <div className="mb-4 pb-4 border-b border-gray-200">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">👁️ Live Preview</h2>
-        <p className="text-gray-600 text-sm">This is how your README will look</p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('livePreview')}</h2>
+        <p className="text-gray-600 text-sm">{t('previewSubtitle')}</p>
       </div>
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
@@ -146,7 +149,7 @@ const PreviewSection = ({ markdown }) => {
       <div className="mt-6">
         <details className="bg-gray-100 rounded-lg">
           <summary className="cursor-pointer p-4 font-semibold text-gray-700 hover:bg-gray-200 rounded-lg transition-colors">
-            📄 View Raw Markdown
+            {t('viewRawMarkdown')}
           </summary>
           <div className="p-4">
             <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
