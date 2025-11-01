@@ -42,59 +42,8 @@ Add/remove and customize any section:
 
 No installation required! Simply visit the link and start creating beautiful README files instantly.
 
-## 🚀 Local Development
 
-Want to run or contribute to the project locally?
 
-### Prerequisites
-
-- Node.js 18+ and npm installed
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd ReadmeGenerator
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open your browser**
-   Navigate to `http://localhost:5173/`
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-The built files will be in the `dist` directory.
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-### Deploy to Netlify
-
-The project is configured for easy deployment to Netlify:
-
-1. Push your code to GitHub
-2. Connect your repository to Netlify
-3. Netlify will automatically detect the build settings:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-4. Deploy! 🚀
 
 ## 🛠️ Tech Stack
 
