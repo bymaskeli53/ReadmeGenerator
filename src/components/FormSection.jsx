@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const FormSection = ({ data, onChange }) => {
