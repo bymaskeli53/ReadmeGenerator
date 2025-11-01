@@ -132,10 +132,6 @@ The app supports two languages with complete translations:
 
 All UI elements, labels, buttons, placeholders, and help text are translated. The language preference is stored in `localStorage` and persists across sessions.
 
-## 📄 License
-
-This project is licensed under the ISC License.
-
 ---
 
 <div align="center">
