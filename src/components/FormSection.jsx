@@ -705,12 +705,68 @@ const FormSection = ({ data, onChange }) => {
         <label className="flex items-center cursor-pointer">
           <input
             type="checkbox"
-            checked={data.footer || false}
-            onChange={(e) => updateField('footer', e.target.checked)}
+            checked={data.footer?.enabled || false}
+            onChange={(e) => {
+              const newData = { ...data };
+              if (!newData.footer) newData.footer = {};
+              newData.footer.enabled = e.target.checked;
+              onChange(newData);
+            }}
             className="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
           <span className="text-sm font-medium text-gray-700">Include Footer</span>
         </label>
+
+        {data.footer?.enabled && (
+          <div className="space-y-3 ml-6 p-4 bg-gray-50 rounded-lg">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Footer Title</label>
+              <input
+                type="text"
+                value={data.footer?.title || ''}
+                onChange={(e) => {
+                  const newData = { ...data };
+                  if (!newData.footer) newData.footer = { enabled: true };
+                  newData.footer.title = e.target.value;
+                  onChange(newData);
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                placeholder="⭐ Star this repository if you found it helpful!"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Footer Message</label>
+              <input
+                type="text"
+                value={data.footer?.message || ''}
+                onChange={(e) => {
+                  const newData = { ...data };
+                  if (!newData.footer) newData.footer = { enabled: true };
+                  newData.footer.message = e.target.value;
+                  onChange(newData);
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                placeholder="Made with ❤️"
+              />
+            </div>
+
+            <label className="flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={data.footer?.centered !== false}
+                onChange={(e) => {
+                  const newData = { ...data };
+                  if (!newData.footer) newData.footer = { enabled: true };
+                  newData.footer.centered = e.target.checked;
+                  onChange(newData);
+                }}
+                className="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <span className="text-sm font-medium text-gray-700">Center Footer</span>
+            </label>
+          </div>
+        )}
       </section>
     </div>
   );

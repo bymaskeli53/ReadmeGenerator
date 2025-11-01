@@ -152,11 +152,27 @@ export const generateMarkdown = (data) => {
   }
 
   // Footer
-  if (data.footer) {
-    markdown += '<div align="center">\n\n';
-    markdown += '### ⭐ Star this repository if you found it helpful!\n\n';
-    markdown += '**Made with ❤️**\n\n';
-    markdown += '</div>\n';
+  if (data.footer?.enabled || data.footer === true) {
+    const footerCentered = data.footer?.centered !== false;
+
+    if (footerCentered) {
+      markdown += '<div align="center">\n\n';
+    }
+
+    const footerTitle = data.footer?.title || '⭐ Star this repository if you found it helpful!';
+    const footerMessage = data.footer?.message || 'Made with ❤️';
+
+    if (footerTitle) {
+      markdown += `### ${footerTitle}\n\n`;
+    }
+
+    if (footerMessage) {
+      markdown += `**${footerMessage}**\n\n`;
+    }
+
+    if (footerCentered) {
+      markdown += '</div>\n';
+    }
   }
 
   return markdown;
@@ -231,5 +247,10 @@ export const defaultData = {
     sampleResponse: '{\n  "id": "1",\n  "name": "Sample",\n  "status": "active"\n}'
   },
   license: 'MIT',
-  footer: true
+  footer: {
+    enabled: true,
+    title: '⭐ Star this repository if you found it helpful!',
+    message: 'Made with ❤️',
+    centered: true
+  }
 };
