@@ -6,8 +6,6 @@ A modern, interactive web application that helps you generate professional READM
 
 🌐 **[Try it Live!](https://megreadmegenerator.netlify.app/)**
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR_SITE_ID/deploy-status)](https://app.netlify.com/sites/megreadmegenerator/deploys)
-
 ## ✨ Features
 
 ### Core Features
