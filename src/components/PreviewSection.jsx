@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 
 const PreviewSection = ({ markdown }) => {
   return (
@@ -13,6 +14,7 @@ const PreviewSection = ({ markdown }) => {
         <div className="markdown-preview prose prose-slate max-w-none">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
             components={{
               // Custom rendering for code blocks
               code({ node, inline, className, children, ...props }) {
