@@ -30,12 +30,12 @@ function AppContent() {
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div>
+        <div className="container mx-auto px-8 py-4 flex justify-between items-center">
+          <div className="flex-shrink-0">
             <h1 className="text-2xl font-bold">{t('appTitle')}</h1>
             <p className="text-sm text-blue-100">{t('appSubtitle')}</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 ml-auto">
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
